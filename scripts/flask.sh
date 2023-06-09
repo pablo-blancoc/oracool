@@ -7,4 +7,4 @@ cd backend
 source venv/bin/activate
 
 # run the app
-python oracooool/app.py
+gunicorn -w 1 --bind 0.0.0.0:5001 wsgi

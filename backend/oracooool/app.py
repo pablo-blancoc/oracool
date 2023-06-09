@@ -7,6 +7,9 @@ from flask import Flask, jsonify
 from flask_cors import CORS
 from flask_jwt_extended import JWTManager
 
+from .apis.drivers import drivers
+from .apis.teams import teams
+
 # CONFIG
 load_dotenv()
 
@@ -31,6 +34,10 @@ app.config.from_mapping(app_config)
 # app config
 jwt = JWTManager(app)
 
+# Blueprints
+app.register_blueprint(drivers, name="drivers")
+app.register_blueprint(teams, name="teams")
+
 
 @app.route("/", methods=["GET"])
 def index() -> str:
@@ -53,8 +60,3 @@ def not_found_error(error: Any):
         404: a description of the error in JSON format
     """
     return jsonify(error=str(error)), 404
-
-
-if '__main__' == __name__:
-    run_debug = bool(int(os.getenv('IS_DEBUG')))
-    app.run(host='0.0.0.0', port=5001, debug=run_debug)
