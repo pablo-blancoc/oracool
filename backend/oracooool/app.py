@@ -8,6 +8,7 @@ from flask_cors import CORS
 from flask_jwt_extended import JWTManager
 
 from .apis.drivers import drivers
+from .apis.teams import teams
 
 # CONFIG
 load_dotenv()
@@ -35,6 +36,7 @@ jwt = JWTManager(app)
 
 # Blueprints
 app.register_blueprint(drivers, name="drivers")
+app.register_blueprint(teams, name="teams")
 
 
 @app.route("/", methods=["GET"])
