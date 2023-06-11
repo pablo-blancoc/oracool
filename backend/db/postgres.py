@@ -5,6 +5,8 @@ import psycopg2.pool
 from dotenv import load_dotenv
 from psycopg2 import extensions
 
+from shared import UniqueDBError
+
 load_dotenv()
 
 # DATABASE CREDENTIALS
@@ -38,6 +40,13 @@ def db_cursor() -> extensions.cursor:
 
     except psycopg2.Error as e:
         conn.rollback()
+
+        # unique constraint violation
+        if e.pgcode == "23505":
+            raise UniqueDBError(e.diag.message_primary)
+        else:
+            raise Exception(e.pgcode)
+
         raise Exception(e.pgcode)
 
     finally:

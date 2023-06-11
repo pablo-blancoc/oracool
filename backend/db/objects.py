@@ -43,3 +43,45 @@ class Team:
             "car_description": self.car_description,
             "image": self.image,
         }
+
+
+class Group:
+
+    num_attrs = 4
+
+    def __init__(self):
+        self.id: uuid.UUID = None
+        self.name: str = None
+        self.description: str = None
+        self.owner: Union[uuid.UUID, User] = None
+
+    def d(self) -> dict:
+        return {
+            "id": self.id.hex,
+            "name": self.name,
+            "description": self.description,
+            "owner": self.owner.d() if isinstance(self.owner, User) else self.owner.hex,
+        }
+
+
+class User:
+
+    num_attrs = 7
+
+    def __init__(self):
+        self.id: uuid.UUID = None
+        self.name: str = None
+        self.username: str = None
+        self.password: str = None
+        self.profile_picture: Any = None
+        self.bio: str = None
+        self.points: int = 0
+
+    def d(self) -> dict:
+        return {
+            "id": self.id.hex,
+            "name": self.name,
+            "username": self.username,
+            "bio": self.bio,
+            "points": self.points,
+        }

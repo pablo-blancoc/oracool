@@ -24,13 +24,14 @@ CREATE TABLE IF NOT EXISTS "users" (
   "pwd" text NOT NULL,
   "profile_picture" bytea,
   "bio" text,
-  "points" smallint
+  "points" smallint NOT NULL DEFAULT 0
 );
 
 CREATE TABLE IF NOT EXISTS "groups" (
   "id" uuid PRIMARY KEY DEFAULT (uuid_generate_v4()),
   "name" varchar(128) NOT NULL,
-  "description" text NOT NULL
+  "description" text NOT NULL,
+  "owner" uuid NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS "user_belongs_to_group" (
@@ -80,6 +81,7 @@ CREATE TABLE IF NOT EXISTS "predictions" (
 
 -- foreign keys
 ALTER TABLE "drivers" ADD FOREIGN KEY ("team") REFERENCES "teams" ("id");
+ALTER TABLE "groups" ADD FOREIGN KEY ("owner") REFERENCES "users" ("id");
 ALTER TABLE "user_belongs_to_group" ADD FOREIGN KEY ("user") REFERENCES "users" ("id");
 ALTER TABLE "user_belongs_to_group" ADD FOREIGN KEY ("group") REFERENCES "groups" ("id");
 ALTER TABLE "messages" ADD FOREIGN KEY ("user") REFERENCES "users" ("id");

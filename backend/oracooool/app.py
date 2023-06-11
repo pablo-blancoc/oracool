@@ -9,6 +9,8 @@ from flask_jwt_extended import JWTManager
 
 from .apis.drivers import drivers
 from .apis.teams import teams
+from .apis.groups import groups
+from .apis.auth import auth
 
 # CONFIG
 load_dotenv()
@@ -23,7 +25,7 @@ app_config = {
     "JWT_SECRET_KEY": os.getenv("FLASK_JWT_SESSION_SECRET_KEY"),
     "JWT_TOKEN_LOCATION": ["cookies"],
     "JWT_COOKIE_SAMESITE": "Strict",
-    "JWT_COOKIE_SECURE": True,
+    "JWT_COOKIE_SECURE": False,
     "JWT_ACCESS_TOKEN_EXPIRES": timedelta(days=30),
     "JWT_COOKIE_CSRF_PROTECT": False
 }
@@ -37,6 +39,8 @@ jwt = JWTManager(app)
 # Blueprints
 app.register_blueprint(drivers, name="drivers")
 app.register_blueprint(teams, name="teams")
+app.register_blueprint(groups, name="groups")
+app.register_blueprint(auth, name="auth")
 
 
 @app.route("/", methods=["GET"])

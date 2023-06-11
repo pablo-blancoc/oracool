@@ -1,5 +1,5 @@
 from shared import format_exception
-from db.objects import Driver, Team
+from db.objects import Driver, Team, Group, User
 import uuid
 
 
@@ -46,3 +46,47 @@ def tuple_to_team(data: tuple) -> Team:
         return None
 
     return team
+
+
+def tuple_to_group(data: tuple) -> Group:
+    if data is None:
+        return None
+
+    try:
+        if data[0] is None:
+            return None
+
+        group = Group()
+        group.id = uuid.UUID(data[0])
+        group.name = str(data[1])
+        group.description = str(data[2])
+        group.owner = uuid.UUID(data[3])
+
+    except Exception as err:
+        print(format_exception(err))
+        return None
+
+    return group
+
+
+def tuple_to_user(data: tuple) -> User:
+    if data is None:
+        return None
+
+    try:
+        if data[0] is None:
+            return None
+
+        user = User()
+        user.id = uuid.UUID(data[0])
+        user.name = str(data[1])
+        user.username = str(data[2])
+        user.password = str(data[3])
+        user.bio = str(data[5])
+        user.points = int(data[6])
+
+    except Exception as err:
+        print(format_exception(err))
+        return None
+
+    return user
