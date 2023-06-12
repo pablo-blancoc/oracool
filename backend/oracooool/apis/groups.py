@@ -26,6 +26,42 @@ def get_my_groups():
     ), 200
 
 
+@groups.route("/<group_id>/join", methods=["POST"])
+@jwt_required(locations=["cookies"])
+def join_group(group_id: str):
+
+    try:
+        user_id = parse_uuid(get_jwt_identity())
+        group_id = parse_uuid(group_id)
+    except ValueError:
+        return jsonify({"err": "login required or group id is not valid"})
+
+    joined = f.join_group(user_id=user_id, group_id=group_id)
+
+    if joined:
+        return jsonify({'msg': 'success'}), 200
+    
+    return jsonify({'msg': 'error'}), 400
+
+
+@groups.route("/<group_id>/remove", methods=["POST"])
+@jwt_required(locations=["cookies"])
+def remove_group(group_id: str):
+
+    try:
+        user_id = parse_uuid(get_jwt_identity())
+        group_id = parse_uuid(group_id)
+    except ValueError:
+        return jsonify({"err": "login required or group id is not valid"})
+
+    joined = f.remove_group(user_id=user_id, group_id=group_id)
+
+    if joined:
+        return jsonify({'msg': 'success'}), 200
+    
+    return jsonify({'msg': 'error'}), 400
+
+
 @groups.route("/", methods=["POST"])
 @jwt_required(locations=["cookies"])
 def create_a_group():

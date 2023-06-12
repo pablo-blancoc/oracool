@@ -35,3 +35,35 @@ def create_a_group(name: str, description: str, owner: uuid.UUID) -> Group:
         cur.execute(q, data)
 
     return group
+
+
+def join_group(user_id: uuid.UUID, group_id: uuid.UUID) -> bool:
+    try:
+        q = queries.ADD_USER_TO_GROUP
+        data = (str(user_id), str(group_id))
+        result = None
+
+        with db_cursor() as cur:
+            cur.execute(q, data)
+            result = cur.fetchone()
+
+        return (result is not None)
+    
+    except Exception as err:
+        print(err)
+        return False
+
+
+def remove_group(user_id: uuid.UUID, group_id: uuid.UUID) -> bool:
+    try:
+        q = queries.REMOVE_USER_FROM_GROUP
+        data = (str(user_id), str(group_id))
+
+        with db_cursor() as cur:
+            cur.execute(q, data)
+
+        return True
+    
+    except ImportError as err:
+        print(err)
+        return False

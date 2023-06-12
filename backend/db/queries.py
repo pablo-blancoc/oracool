@@ -25,4 +25,6 @@ WHERE
 
 CREATE_A_GROUP = "INSERT INTO groups(name, description, owner) VALUES(%s, %s, %s) RETURNING *"
 
-ADD_USER_TO_GROUP = "INSERT INTO user_belongs_to_group VALUES(%s, %s)"
+ADD_USER_TO_GROUP = "INSERT INTO user_belongs_to_group VALUES(%s, %s) RETURNING *"
+
+REMOVE_USER_FROM_GROUP = "DELETE FROM user_belongs_to_group WHERE (user_belongs_to_group.user = %s AND user_belongs_to_group.group = %s)"
