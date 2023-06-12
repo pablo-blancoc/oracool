@@ -34,8 +34,7 @@ pnp/
 # Built files
 build/
 dist/
-*.css
-*.js
+
 
 # Log files
 logs/
