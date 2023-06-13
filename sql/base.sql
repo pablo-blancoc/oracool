@@ -6,7 +6,8 @@ CREATE TABLE IF NOT EXISTS "drivers" (
   "team" uuid NOT NULL,
   "nationality" varchar(64),
   "description" text,
-  "image" bytea
+  "image" text,
+  "link" text
 );
 
 CREATE TABLE IF NOT EXISTS "teams" (
@@ -14,7 +15,7 @@ CREATE TABLE IF NOT EXISTS "teams" (
   "name" varchar(128) NOT NULL,
   "description" text,
   "car_description" text,
-  "image" bytea
+  "image" text
 );
 
 CREATE TABLE IF NOT EXISTS "users" (
@@ -22,7 +23,7 @@ CREATE TABLE IF NOT EXISTS "users" (
   "name" varchar(128) NOT NULL,
   "username" varchar(128) UNIQUE NOT NULL,
   "pwd" text NOT NULL,
-  "profile_picture" bytea,
+  "profile_picture" text,
   "bio" text,
   "points" smallint NOT NULL DEFAULT 0
 );
@@ -61,7 +62,7 @@ CREATE TABLE IF NOT EXISTS "circuits" (
   "description" text,
   "country" varchar(64),
   "city" varchar(64),
-  "image" bytea,
+  "image" text,
   "length" real
 );
 
