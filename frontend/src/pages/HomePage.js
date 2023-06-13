@@ -1,8 +1,8 @@
-// src/pages/HomePage.js
-import React from 'react';
+import { Grid } from "@mui/material";
+import SecondaryNavbar from "../components/SecondaryNavbar";
 
-const HomePage = () => {
-  return <div>Welcome to the Home Page</div>;
+export default function HomePage() {
+  return (
+    <SecondaryNavbar/>
+  )
 };
-
-export default HomePage;

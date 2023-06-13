@@ -1,5 +1,5 @@
 from shared import format_exception
-from db.objects import Driver, Team, Group, User
+from db.objects import Driver, Team, Group, User, Circuit
 import uuid
 
 
@@ -91,3 +91,27 @@ def tuple_to_user(data: tuple) -> User:
         return None
 
     return user
+
+
+def tuple_to_circuit(data: tuple) -> Circuit:
+    if data is None:
+        return None
+
+    try:
+        if data[0] is None:
+            return None
+
+        circuit = Circuit()
+        circuit.id = uuid.UUID(data[0])
+        circuit.name = str(data[1])
+        circuit.description = str(data[2])
+        circuit.country = str(data[3])
+        circuit.city = str(data[4])
+        circuit.image = str(data[5])
+        circuit.length = float(data[6])
+
+    except Exception as err:
+        print(format_exception(err))
+        return None
+
+    return circuit

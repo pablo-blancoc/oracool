@@ -41,3 +41,5 @@ ON
 WHERE
     user_belongs_to_group.group = %s
 """
+
+GET_ALL_CIRCUITS = "SELECT * FROM circuits"

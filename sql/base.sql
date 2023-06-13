@@ -48,14 +48,6 @@ CREATE TABLE IF NOT EXISTS "messages" (
   "by_user" boolean NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS "historical" (
-  "year" smallint NOT NULL,
-  "circuit" uuid NOT NULL,
-  "driver" uuid NOT NULL,
-  "quali" smallint,
-  "final" smallint
-);
-
 CREATE TABLE IF NOT EXISTS "circuits" (
   "id" uuid PRIMARY KEY DEFAULT (uuid_generate_v4()),
   "name" varchar(128),
@@ -86,8 +78,6 @@ ALTER TABLE "groups" ADD FOREIGN KEY ("owner") REFERENCES "users" ("id");
 ALTER TABLE "user_belongs_to_group" ADD FOREIGN KEY ("user") REFERENCES "users" ("id");
 ALTER TABLE "user_belongs_to_group" ADD FOREIGN KEY ("group") REFERENCES "groups" ("id");
 ALTER TABLE "messages" ADD FOREIGN KEY ("user") REFERENCES "users" ("id");
-ALTER TABLE "historical" ADD FOREIGN KEY ("circuit") REFERENCES "circuits" ("id");
-ALTER TABLE "historical" ADD FOREIGN KEY ("driver") REFERENCES "drivers" ("id");
 ALTER TABLE "next_results" ADD FOREIGN KEY ("circuit") REFERENCES "circuits" ("id");
 ALTER TABLE "next_results" ADD FOREIGN KEY ("driver") REFERENCES "drivers" ("id");
 ALTER TABLE "predictions" ADD FOREIGN KEY ("user") REFERENCES "users" ("id");
