@@ -1,5 +1,5 @@
 import { Grid } from "@mui/material";
-import SecondaryNavbar from "../navigation/SecondaryNavbar";
+import SecondaryNavbar from "../components/SecondaryNavbar";
 
 export default function HomePage() {
   return (
