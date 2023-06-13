@@ -3,7 +3,7 @@ import uuid
 
 class Driver:
 
-    num_attrs = 6
+    num_attrs = 7
 
     def __init__(self):
         self.id: uuid.UUID = None
@@ -11,7 +11,8 @@ class Driver:
         self.team: Union[uuid.UUID, Team] = None
         self.nationality: str = None
         self.description: str = None
-        self.image: Any = None
+        self.image: str = None
+        self.link: str = None
 
     def d(self) -> dict:
         return {
@@ -21,6 +22,7 @@ class Driver:
             "nationality": self.nationality,
             "description": self.description,
             "image": self.image,
+            "link": self.link,
         }
 
 
@@ -33,7 +35,7 @@ class Team:
         self.name: str = None
         self.description: str = None
         self.car_description: str = None
-        self.image: Any = None
+        self.image: str = None
 
     def d(self) -> dict:
         return {

@@ -17,7 +17,8 @@ def tuple_to_driver(data: tuple) -> Driver:
         driver.team = uuid.UUID(data[2])
         driver.nationality = str(data[3])
         driver.description = str(data[4])
-        driver.image = data[5]
+        driver.image = str(data[5])
+        driver.link = str(data[6])
 
     except Exception as err:
         print(format_exception(err))
@@ -39,7 +40,7 @@ def tuple_to_team(data: tuple) -> Team:
         team.name = str(data[1])
         team.description = str(data[2])
         team.car_description = str(data[3])
-        team.image = data[4]
+        team.image = str(data[4])
 
     except Exception as err:
         print(format_exception(err))
