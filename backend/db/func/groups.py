@@ -1,7 +1,7 @@
 import uuid
-from db.utils import tuple_to_group
+from db.utils import tuple_to_group, tuple_to_user
 from db.postgres import db_cursor
-from db.objects import Group
+from db.objects import Group, User
 from db import queries
 
 
@@ -64,6 +64,23 @@ def remove_group(user_id: uuid.UUID, group_id: uuid.UUID) -> bool:
 
         return True
     
-    except ImportError as err:
+    except Exception as err:
+        print(err)
+        return False
+
+
+def get_all_users_from_group(group_id: uuid.UUID) -> list[User]:
+    try:
+        q = queries.GET_ALL_USERS_FROM_GROUP
+        data = (str(group_id), )
+        results = None
+
+        with db_cursor() as cur:
+            cur.execute(q, data)
+            results = cur.fetchall()
+
+        return [tuple_to_user(result) for result in results]
+    
+    except Exception as err:
         print(err)
         return False

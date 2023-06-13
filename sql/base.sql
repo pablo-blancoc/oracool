@@ -6,7 +6,8 @@ CREATE TABLE IF NOT EXISTS "drivers" (
   "team" uuid NOT NULL,
   "nationality" varchar(64),
   "description" text,
-  "image" bytea
+  "image" text,
+  "link" text
 );
 
 CREATE TABLE IF NOT EXISTS "teams" (
@@ -14,7 +15,7 @@ CREATE TABLE IF NOT EXISTS "teams" (
   "name" varchar(128) NOT NULL,
   "description" text,
   "car_description" text,
-  "image" bytea
+  "image" text
 );
 
 CREATE TABLE IF NOT EXISTS "users" (
@@ -22,7 +23,7 @@ CREATE TABLE IF NOT EXISTS "users" (
   "name" varchar(128) NOT NULL,
   "username" varchar(128) UNIQUE NOT NULL,
   "pwd" text NOT NULL,
-  "profile_picture" bytea,
+  "profile_picture" text,
   "bio" text,
   "points" smallint NOT NULL DEFAULT 0
 );
@@ -42,17 +43,9 @@ CREATE TABLE IF NOT EXISTS "user_belongs_to_group" (
 
 CREATE TABLE IF NOT EXISTS "messages" (
   "id" bigserial PRIMARY KEY,
-  "user" uuid NOT NULL,
+  "userid" uuid NOT NULL,
   "content" text NOT NULL,
   "by_user" boolean NOT NULL
-);
-
-CREATE TABLE IF NOT EXISTS "historical" (
-  "year" smallint NOT NULL,
-  "circuit" uuid NOT NULL,
-  "driver" uuid NOT NULL,
-  "quali" smallint,
-  "final" smallint
 );
 
 CREATE TABLE IF NOT EXISTS "circuits" (
@@ -61,7 +54,7 @@ CREATE TABLE IF NOT EXISTS "circuits" (
   "description" text,
   "country" varchar(64),
   "city" varchar(64),
-  "image" bytea,
+  "image" text,
   "length" real
 );
 
@@ -85,8 +78,6 @@ ALTER TABLE "groups" ADD FOREIGN KEY ("owner") REFERENCES "users" ("id");
 ALTER TABLE "user_belongs_to_group" ADD FOREIGN KEY ("user") REFERENCES "users" ("id");
 ALTER TABLE "user_belongs_to_group" ADD FOREIGN KEY ("group") REFERENCES "groups" ("id");
 ALTER TABLE "messages" ADD FOREIGN KEY ("user") REFERENCES "users" ("id");
-ALTER TABLE "historical" ADD FOREIGN KEY ("circuit") REFERENCES "circuits" ("id");
-ALTER TABLE "historical" ADD FOREIGN KEY ("driver") REFERENCES "drivers" ("id");
 ALTER TABLE "next_results" ADD FOREIGN KEY ("circuit") REFERENCES "circuits" ("id");
 ALTER TABLE "next_results" ADD FOREIGN KEY ("driver") REFERENCES "drivers" ("id");
 ALTER TABLE "predictions" ADD FOREIGN KEY ("user") REFERENCES "users" ("id");
