@@ -86,7 +86,7 @@ export default function MainNavbar(props) {
             sx={{ flexGrow: 1 }}
             onClick={() => { navigate("/") }}
           >
-            <img src="Oracool_logo.svg" width="100px" alt="Oracool Logo"></img>
+            <img src="oracle_logo.svg" width="100px" alt="Oracle Logo"></img>
           </Box>
           <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
             {navItems.map((item) => (
