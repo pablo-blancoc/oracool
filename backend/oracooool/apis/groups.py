@@ -26,6 +26,21 @@ def get_my_groups():
     ), 200
 
 
+@groups.route("/<group_id>/people", methods=["GET"])
+@jwt_required(locations=["cookies"])
+def get_all_users_from_group(group_id: str):
+
+    try:
+        parse_uuid(get_jwt_identity())
+        group_id = parse_uuid(group_id)
+    except ValueError:
+        return jsonify({"err": "login required or group id is not valid"})
+
+    users = f.get_all_users_from_group(group_id=group_id)
+
+    return jsonify({'users': [user.d() for user in users]}), 200
+
+
 @groups.route("/<group_id>/join", methods=["POST"])
 @jwt_required(locations=["cookies"])
 def join_group(group_id: str):
