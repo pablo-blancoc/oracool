@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS "user_belongs_to_group" (
 
 CREATE TABLE IF NOT EXISTS "messages" (
   "id" bigserial PRIMARY KEY,
-  "user" uuid NOT NULL,
+  "userid" uuid NOT NULL,
   "content" text NOT NULL,
   "by_user" boolean NOT NULL
 );
@@ -60,7 +60,7 @@ CREATE TABLE IF NOT EXISTS "circuits" (
 
 CREATE TABLE IF NOT EXISTS "next_results" (
   "circuit" uuid NOT NULL,
-  "driver" varchar(256) NOT NULL,
+  "driver" uuid NOT NULL,
   "prediction" smallint
 );
 
@@ -79,5 +79,6 @@ ALTER TABLE "user_belongs_to_group" ADD FOREIGN KEY ("user") REFERENCES "users" 
 ALTER TABLE "user_belongs_to_group" ADD FOREIGN KEY ("group") REFERENCES "groups" ("id");
 ALTER TABLE "messages" ADD FOREIGN KEY ("user") REFERENCES "users" ("id");
 ALTER TABLE "next_results" ADD FOREIGN KEY ("circuit") REFERENCES "circuits" ("id");
+ALTER TABLE "next_results" ADD FOREIGN KEY ("driver") REFERENCES "drivers" ("id");
 ALTER TABLE "predictions" ADD FOREIGN KEY ("user") REFERENCES "users" ("id");
 ALTER TABLE "predictions" ADD FOREIGN KEY ("circuit") REFERENCES "circuits" ("id");
