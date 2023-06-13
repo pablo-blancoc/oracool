@@ -1,31 +1,17 @@
 from db.postgres import db_cursor
 import uuid
-
-def retrieve_all_messages(user_id: uuid.UUID):
-    try:
-        with db_cursor() as cur:
-            cur.execute("SELECT * FROM messages WHERE userid = %s", (user_id,))
-            result = cur.fetchall()
-            if result is None:
-                return "No messages found for this user."
-            else:
-                return result
-    except Exception as err:
-        print(err)
-        return None
     
 def retrieve_all_messages_by_user(user_id: uuid.UUID):
     try:
         with db_cursor() as cur:
-            cur.execute("SELECT * FROM messages WHERE userid = %s", (user_id,))
+            cur.execute("SELECT * FROM messages WHERE userid = %s", (str(user_id),))
             result = cur.fetchall()
             if result is None:
                 return "No messages found for this user."
             else:
                 return result
-    except Exception as err:
-        print(err)
-        return None
+    except ImportError as err:
+        return err
 
 def upload_message(user_id: uuid.UUID, content: str, by_user: bool) -> None:
     """

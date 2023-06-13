@@ -50,7 +50,8 @@ def message_to_prompt():
 def get_messages():
     try:
         user_id = parse_uuid(get_jwt_identity())
-        response = messages.retrieve_all_messages(user_id)
+        response = messages.retrieve_all_messages_by_user(user_id)
+        print(response)
         return jsonify({"response": response}), 200
     except Exception as e:
         return jsonify({"err": str(e)}), 500
