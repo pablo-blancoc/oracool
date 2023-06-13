@@ -87,3 +87,28 @@ class User:
             "bio": self.bio,
             "points": self.points,
         }
+
+
+class Circuit:
+
+    num_attrs = 7
+
+    def __init__(self):
+        self.id: uuid.UUID = None
+        self.name: str = None
+        self.description: str = None
+        self.country: str = None
+        self.city: str = None
+        self.image: str = None
+        self.length: float = None
+
+    def d(self) -> dict:
+        return {
+            "id": self.id,
+            "name": self.name,
+            "description": self.description,
+            "country": self.country,
+            "city": self.city,
+            "image": self.image,
+            "length": self.length,
+        }

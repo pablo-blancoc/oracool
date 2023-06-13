@@ -48,14 +48,6 @@ CREATE TABLE IF NOT EXISTS "messages" (
   "by_user" boolean NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS "historical" (
-  "year" smallint NOT NULL,
-  "circuit" uuid NOT NULL,
-  "driver" uuid NOT NULL,
-  "quali" smallint,
-  "final" smallint
-);
-
 CREATE TABLE IF NOT EXISTS "circuits" (
   "id" uuid PRIMARY KEY DEFAULT (uuid_generate_v4()),
   "name" varchar(128),
@@ -68,7 +60,7 @@ CREATE TABLE IF NOT EXISTS "circuits" (
 
 CREATE TABLE IF NOT EXISTS "next_results" (
   "circuit" uuid NOT NULL,
-  "driver" uuid NOT NULL,
+  "driver" varchar(256) NOT NULL,
   "prediction" smallint
 );
 
