@@ -11,7 +11,7 @@ from .apis.drivers import drivers
 from .apis.teams import teams
 from .apis.groups import groups
 from .apis.auth import auth
-
+from .apis.chatbot import chatbot
 # CONFIG
 load_dotenv()
 
@@ -41,6 +41,7 @@ app.register_blueprint(drivers, name="drivers")
 app.register_blueprint(teams, name="teams")
 app.register_blueprint(groups, name="groups")
 app.register_blueprint(auth, name="auth")
+app.register_blueprint(chatbot, name="chatbot")
 
 
 @app.route("/", methods=["GET"])
