@@ -1,9 +1,10 @@
 from db.postgres import db_cursor
+import uuid
 
-def retrieve_all_messages(user_id):
+def retrieve_all_messages(user_id: uuid.UUID):
     try:
         with db_cursor() as cur:
-            cur.execute("SELECT * FROM messages WHERE user = %s", (user_id,))
+            cur.execute("SELECT * FROM messages WHERE userid = %s", (user_id,))
             result = cur.fetchall()
             if result is None:
                 return "No messages found for this user."
@@ -13,10 +14,10 @@ def retrieve_all_messages(user_id):
         print(err)
         return None
     
-def retrieve_all_messages_by_user(user_id):
+def retrieve_all_messages_by_user(user_id: uuid.UUID):
     try:
         with db_cursor() as cur:
-            cur.execute("SELECT * FROM messages WHERE user = %s AND by_user = True", (user_id,))
+            cur.execute("SELECT * FROM messages WHERE userid = %s", (user_id,))
             result = cur.fetchall()
             if result is None:
                 return "No messages found for this user."
@@ -26,7 +27,7 @@ def retrieve_all_messages_by_user(user_id):
         print(err)
         return None
 
-def upload_message(user_id, content, by_user):
+def upload_message(user_id: uuid.UUID, content: str, by_user: bool) -> None:
     """
     Upload a message to the database.
     
@@ -39,22 +40,13 @@ def upload_message(user_id, content, by_user):
         
         # SQL query to insert the message
         insert_query = """
-            INSERT INTO messages (user, content, by_user)
+            INSERT INTO messages(userid, content, by_user)
             VALUES (%s, %s, %s)
         """
         with db_cursor() as cur:
             # Execute the query
-            cur.execute(insert_query, (user_id, content, by_user))
-            
-            # Commit the changes
-            cur.connection.commit()
-        
-    except Exception as error:
+            cur.execute(insert_query, (str(user_id), content, by_user))
+            return
+    except ImportError as error:
         print(f"Error: {error}")
     
-
-# Example usage:
-
-# upload_message('user_uuid_here', 'Hello chatbot!', True)
-
-# upload_message('user_uuid_here', 'Hello user!', False)

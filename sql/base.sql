@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS "user_belongs_to_group" (
 
 CREATE TABLE IF NOT EXISTS "messages" (
   "id" bigserial PRIMARY KEY,
-  "user" uuid NOT NULL,
+  "userid" uuid NOT NULL,
   "content" text NOT NULL,
   "by_user" boolean NOT NULL
 );
