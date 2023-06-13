@@ -13,43 +13,20 @@ import DriversPage from './pages/DriversPage';
 import TeamsPage from './pages/TeamsPage';
 import HistoricalDataPage from './pages/HistoricalDataPage';
 
-// function App() {
-//   return (
-//     <Router>
-//       <MainNavbar />
-//       <SecondaryNavbar />
-//       <Routes>
-//         <Route path="/" exact element={HomePage} />
-//         <Route path="/signin" element={SignInPage} />
-//         <Route path="/rules" element={RulesPage} />
-//         <Route path="/simulation" element={SimulationPage} />
-//         <Route path="/leaderboard" element={LeaderboardPage} />
-//         <Route path="/grandprix" element={GrandPrixPage} />
-//         <Route path="/drivers" element={DriversPage} />
-//         <Route path="/teams" element={TeamsPage} />
-//         <Route path="/historical-data" element={HistoricalDataPage} />
-//       </Routes>
-//     </Router>
-//   );
-// }
-
-// export default App;
-
 export default function App() {
   return (
     <Router>
       <MainNavbar />
-      <SecondaryNavbar />
       <Routes>
-        <Route path="/" exact element={<HomePage/>} />
-        <Route path="/signin" element={<SignInPage/>} />
-        <Route path="/rules" element={<RulesPage/>} />
-        <Route path="/simulation" element={<SimulationPage/>} />
-        <Route path="/leaderboard" element={<LeaderboardPage/>} />
-        <Route path="/grandprix" element={<GrandPrixPage/>} />
-        <Route path="/drivers" element={<DriversPage/>} />
-        <Route path="/teams" element={<TeamsPage/>} />
-        <Route path="/historical-data" element={<HistoricalDataPage/>} />
+        <Route path="/" exact element={<HomePage />} />
+        <Route path="/signin" element={<SignInPage />} />
+        <Route path="/rules" element={<RulesPage />} />
+        <Route path="/simulation" element={<SimulationPage />} />
+        <Route path="/leaderboard" element={<LeaderboardPage />} />
+        <Route path="/grandprix" element={<GrandPrixPage />} />
+        <Route path="/drivers" element={<DriversPage />} />
+        <Route path="/teams" element={<TeamsPage />} />
+        <Route path="/historical-data" element={<HistoricalDataPage />} />
       </Routes>
     </Router>
   );

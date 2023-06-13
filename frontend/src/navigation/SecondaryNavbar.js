@@ -1,16 +1,16 @@
-// src/navigation/SecondaryNavbar.js
-import React from 'react';
-import { Link } from 'react-router-dom';
+import { Grid } from "@mui/material";
 
-const SecondaryNavbar = () => {
+export default function SecondaryNavbar(props) {
   return (
-    <nav>
-      <Link to="/grandprix">Grand Prix</Link>
-      <Link to="/drivers">Drivers</Link>
-      <Link to="/teams">Teams</Link>
-      <Link to="/historical-data">Historical Data</Link>
-    </nav>
-  );
-};
-
-export default SecondaryNavbar;
+    <Grid
+      container
+      justifyContent="left"
+      alignItems="center"
+      minWidth="100vw"
+      minHeight="70px"
+      sx={{ backgroundColor: "#d60000" }}
+    >
+      content
+    </Grid>
+  )
+}
