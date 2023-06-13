@@ -23,7 +23,6 @@ import {
 } from "@chatscope/chat-ui-kit-react";
 
 
-const API_KEY = "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";
 function App() {
   const [typing, setTyping] = React.useState(false);
 
@@ -103,7 +102,7 @@ function App() {
   }
 
   return (
-    /*<Router>
+    <Router>
       <MainNavbar />
       <SecondaryNavbar />
       <Routes>
@@ -116,7 +115,7 @@ function App() {
         <Route path="/drivers" component={DriversPage} />
         <Route path="/teams" component={TeamsPage} />
         <Route path="/historical-data" component={HistoricalDataPage} />
-      </Routes>*/
+      </Routes>
       
       <div className="App">
         <div style={{position: "relative", height:"800px",width:"700px"}}>
@@ -139,7 +138,7 @@ function App() {
         </div>
         
       </div>
-    //</Router>
+    </Router>
     
   );
 }
