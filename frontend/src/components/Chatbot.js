@@ -73,7 +73,7 @@ function ChatComponent() {
               scrollBehavior="smooth"
               typingIndicator={
                 isTyping ? (
-                  <TypingIndicator content="ChatGPT is typing" />
+                  <TypingIndicator content="Oracooool is typing" />
                 ) : null
               }
             >
