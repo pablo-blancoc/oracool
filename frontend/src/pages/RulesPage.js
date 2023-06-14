@@ -1,4 +1,4 @@
-import { Grid, Paper, Typography } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import SecondaryNavbar from "../components/SecondaryNavbar";
 
 const data2 = [
