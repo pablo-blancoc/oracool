@@ -12,15 +12,15 @@ import {
 const ChatComponent = ({ messages, typing, handleSend }) => {
   return (
     <div className="App">
-      <div style={{ position: "relative"}}>
-        <MainContainer>
-          <ChatContainer>
+      <div style={{ position: "relative" }}>
+        <MainContainer >
+          <ChatContainer style={{ position: "relative",minHeight: "490px" }}>
             <MessageList
               typingIndicator={typing ? <TypingIndicator content="ChatGPT is typing" /> : null}
             >
               
             </MessageList>
-            <MessageInput placeholder="Type message here" onSend={handleSend} />
+            <MessageInput style={{ fontSize: ".8em" }} placeholder="Type message here" onSend={handleSend} />
           </ChatContainer>
         </MainContainer>
       </div>
