@@ -21,15 +21,15 @@ def check_bot_status():
 
 #Check documentation for request body https://platform.openai.com/docs/api-reference/completions/create
 @chatbot.route("/send_prompt", methods=["POST"])
-@jwt_required(locations=["cookies"])
+# @jwt_required(locations=["cookies"])
 def message_to_prompt():
-    try:
-        user_id = parse_uuid(get_jwt_identity())
-    except ValueError:
-        return jsonify({"err": "login required"})
+    # try:
+    #     user_id = parse_uuid(get_jwt_identity())
+    # except ValueError:
+    #     return jsonify({"err": "login required"})
     try:
         prompt = request.json["prompt"]
-        print(prompt)
+        # print(prompt)
         response = openai.Completion.create(
             engine="text-davinci-003",
             prompt=prompt,
@@ -39,8 +39,8 @@ def message_to_prompt():
             presence_penalty=0.6,
         )
         gpt_reponse = response["choices"][0]["text"]
-        messages.upload_message(user_id, prompt, True)
-        messages.upload_message(user_id, gpt_reponse, False)
+        # messages.upload_message(user_id, prompt, True)
+        # messages.upload_message(user_id, gpt_reponse, False)
         return jsonify({"response": gpt_reponse}), 200
     except ImportError as e:
         return jsonify({"Error": str(e)}), 500
