@@ -39,7 +39,6 @@ function ChatComponent() {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        
       },
       body: JSON.stringify({ prompt: prompt }),
     })
@@ -48,21 +47,17 @@ function ChatComponent() {
       })
       .then((data) => {
         console.log(data);
-        const newMessages = [
-          ...messages,
-          {
-            message: prompt,
-            sender: "user",
-          },
+        setMessages((prevMessages) => [
+          ...prevMessages,
           {
             message: data.response,
             sender: "ChatGPT",
           },
-        ];
-        setMessages(newMessages);
+        ]);
         setIsTyping(false);
       });
   }
+  
 
   return (
     <div className="App">
