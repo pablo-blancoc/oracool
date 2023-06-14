@@ -48,6 +48,7 @@ export default function HomePage() {
         container
         alignItems="center"
         minHeight="250px"
+        spacing={2}
         sx={{ backgroundColor: "#242424" }}
       >
         {
@@ -76,7 +77,7 @@ export default function HomePage() {
                     sx={{
                       height: "200px",
                       borderRadius: "50px",
-                      boxShadow: "0px 2px 2px 0px rgba(0, 0, 0, 0.5), inset 0px -3px 6px -2px rgba(0, 0, 0, 0.3)",
+                      boxShadow: "inset 0px 0px 14px 4px rgba(245, 245, 245, 0.5), inset 0px -3px 6px",
                       "&:hover": {
                         cursor: "pointer"
                       },

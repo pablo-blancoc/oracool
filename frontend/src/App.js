@@ -26,7 +26,7 @@ export default function App() {
         <Route path="/grandprix" element={<GrandPrixPage />} />
         <Route path="/drivers" element={<DriversPage />} />
         <Route path="/teams" element={<TeamsPage />} />
-        <Route path="/historical-data" element={<HistoricalDataPage />} />
+        <Route path="/historicalData" element={<HistoricalDataPage />} />
       </Routes>
     </Router>
   );
