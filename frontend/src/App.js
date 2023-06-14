@@ -13,20 +13,44 @@ import DriversPage from './pages/DriversPage';
 import TeamsPage from './pages/TeamsPage';
 import HistoricalDataPage from './pages/HistoricalDataPage';
 
+const rulesNavbarItems = [
+  {
+    title: "Overview",
+    navigateTo: "/rules"
+  },
+  {
+    title: "Grand Prix",
+    navigateTo: "/grandprix"
+  },
+  {
+    title: "Drivers",
+    navigateTo: "/drivers"
+  },
+  {
+    title: "Teams",
+    navigateTo: "/teams"
+  },
+  {
+    title: "Historical Data",
+    navigateTo: "/historicalData"
+  }
+
+]
+
 export default function App() {
   return (
     <Router>
       <MainNavbar />
       <Routes>
-        <Route path="/" exact element={<HomePage />} />
-        <Route path="/signin" element={<SignInPage />} />
-        <Route path="/rules" element={<RulesPage />} />
-        <Route path="/simulation" element={<SimulationPage />} />
-        <Route path="/leaderboard" element={<LeaderboardPage />} />
-        <Route path="/grandprix" element={<GrandPrixPage />} />
-        <Route path="/drivers" element={<DriversPage />} />
-        <Route path="/teams" element={<TeamsPage />} />
-        <Route path="/historicalData" element={<HistoricalDataPage />} />
+        <Route path="/" exact element={<HomePage secondaryNavbar={<SecondaryNavbar/>}/>} />
+        <Route path="/signin" element={<SignInPage secondaryNavbar={<SecondaryNavbar/>}/>} />
+        <Route path="/rules" element={<RulesPage secondaryNavbar={<SecondaryNavbar tabItems={rulesNavbarItems}/>}/>} />
+        <Route path="/simulation" element={<SimulationPage secondaryNavbar={<SecondaryNavbar/>}/>}/>
+        <Route path="/leaderboard" element={<LeaderboardPage secondaryNavbar={<SecondaryNavbar/>}/>} />
+        <Route path="/grandprix" element={<GrandPrixPage secondaryNavbar={<SecondaryNavbar tabItems={rulesNavbarItems}/>}/>} />
+        <Route path="/drivers" element={<DriversPage secondaryNavbar={<SecondaryNavbar tabItems={rulesNavbarItems}/>}/>} />
+        <Route path="/teams" element={<TeamsPage secondaryNavbar={<SecondaryNavbar tabItems={rulesNavbarItems}/>}/>} />
+        <Route path="/historicalData" element={<HistoricalDataPage secondaryNavbar={<SecondaryNavbar tabItems={rulesNavbarItems}/>}/>} />
       </Routes>
     </Router>
   );

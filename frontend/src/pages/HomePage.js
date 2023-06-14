@@ -20,13 +20,13 @@ const cards = [
   }
 ]
 
-export default function HomePage() {
+export default function HomePage({secondaryNavbar}) {
   
   const navigate = useNavigate();
 
   return (
     <>
-      <SecondaryNavbar />
+      {secondaryNavbar}
       <Grid
         container
         alignItems="center"

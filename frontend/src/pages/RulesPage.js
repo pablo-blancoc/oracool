@@ -45,34 +45,10 @@ const data = [
   }
 ];
 
-const navbarItems = [
-  {
-    title: "Overview",
-    navigateTo: "/rules"
-  },
-  {
-    title: "Grand Prix",
-    navigateTo: ""
-  },
-  {
-    title: "Drivers",
-    navigateTo: "/drivers"
-  },
-  {
-    title: "Teams",
-    navigateTo: "/teams"
-  },
-  {
-    title: "Historical Data",
-    navigateTo: "/historicalData"
-  }
-
-]
-
-export default function RulesPage() {
+export default function RulesPage({secondaryNavbar}) {
   return (
     <>
-      <SecondaryNavbar listItems={navbarItems}/>
+      {secondaryNavbar}
       <Grid
         container
         alignItems="center"

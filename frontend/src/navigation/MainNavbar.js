@@ -14,7 +14,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 import { Tabs, Tab, Menu, MenuItem } from "@mui/material";
 
@@ -38,7 +38,6 @@ const navItems = [
   }
 ];
 
-
 const DrawerHeader = styled('div')(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
@@ -52,8 +51,20 @@ export default function MainNavbar(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
 
-  const [value, setValue] = React.useState(0);
+  function getActiveTabIndex(){
+    var activeTabIndex = false
+    navItems.map((obj, index) => {
+      if (location.pathname === obj.navigateTo){
+        activeTabIndex = index;
+        return;
+      }
+    });
+    return activeTabIndex
+  }
+
+  const [value, setValue] = React.useState(getActiveTabIndex());
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };

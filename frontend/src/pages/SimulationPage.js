@@ -1,4 +1,3 @@
-// src/pages/SimulationPage.js
 import React, { useState } from 'react';
 import {
   Grid,
@@ -16,7 +15,6 @@ import {
   Paper,
   Box,
 } from "@mui/material";
-import SecondaryNavbar from "../components/SecondaryNavbar";
 
 
 // Cambiar a que sean del query
@@ -27,7 +25,7 @@ const trackOptions = [
 
 
 
-const SimulationPage = () => {
+export default function SimulationPage({secondaryNavbar}){
 
   const [selectedTrackId, setSelectedTrackId] = useState(null);
   const [results, setResults] = useState([]);
@@ -43,10 +41,9 @@ const SimulationPage = () => {
     setResults(data);
   };
 
-
   return (
     <>
-      <SecondaryNavbar />
+      {secondaryNavbar}
       <Grid
         container
         alignItems="center"
@@ -197,6 +194,4 @@ const SimulationPage = () => {
       {/* ...rest of your code */}
     </>
   )
-};
-
-export default SimulationPage;
+}
