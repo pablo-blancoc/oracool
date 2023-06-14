@@ -12,6 +12,7 @@ import GrandPrixPage from './pages/GrandPrixPage';
 import DriversPage from './pages/DriversPage';
 import TeamsPage from './pages/TeamsPage';
 import HistoricalDataPage from './pages/HistoricalDataPage';
+import Popup from './components/Popup';
 
 export default function App() {
   return (
@@ -29,5 +30,6 @@ export default function App() {
         <Route path="/historical-data" element={<HistoricalDataPage />} />
       </Routes>
     </Router>
+  
   );
 }
