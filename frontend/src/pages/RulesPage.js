@@ -1,5 +1,4 @@
 import { Grid, Typography } from "@mui/material";
-import SecondaryNavbar from "../components/SecondaryNavbar";
 
 const data2 = [
   { title: 'Basics', text: 'Formula 1, often abbreviated as F1, is the highest class of international auto racing sanctioned by the Fédération Internationale de l\'Automobile (FIA). F1 seasons consist of a series of races, known as Grands Prix, held worldwide on both public roads and specialized circuits. The results of each race are evaluated using a points system to determine two annual World Championships: one for drivers and one for constructors (teams).', image: 'https://www.formula1.com/content/dam/fom-website/sutton/2020/Portugal/Sunday/1282134941.jpg.transform/6col/image.jpg' },
