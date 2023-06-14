@@ -44,12 +44,13 @@ const data = [
   }
 ];
 
-export default function RulesPage({secondaryNavbar}) {
+export default function RulesPage({ secondaryNavbar }) {
   return (
     <>
       {secondaryNavbar}
       <Grid
         container
+        direction="row"
         alignItems="center"
         justifyContent="center"
         minHeight="350px"
@@ -64,11 +65,11 @@ export default function RulesPage({secondaryNavbar}) {
         <Grid item style={{ zIndex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
           <Typography
             variant="h5"
-            width="70%"
-            style={{
+            sx={{
               fontWeight: 'bold',
               color: 'rgba(255, 255, 255, 1)', // Adjust the RGB values as desired
-              textAlign: 'center'
+              textAlign: 'center',
+              width: { xs: '90%', md: '70%' } // Adjust the width based on the screen size
             }}
           >
             Unleash the power of speed and strategy with a deep dive into the captivating rules of Formula 1!
@@ -87,21 +88,22 @@ export default function RulesPage({secondaryNavbar}) {
           <Grid item key={rowObject.text}>
             <Grid
               container
-              direction={index % 2 === 0 ? "row-reverse" : "row"} // Inverts layout for even index items
+              direction={{ xs: 'column', sm: index % 2 === 0 ? 'row-reverse' : 'row' }}
               justifyContent="center"
-              // alignItems="center"
               sx={{
-                padding: "15px"
+                padding: "15px",
+                
               }}
             >
               <Grid
                 item
+                xs={12}
+                sm={4}
                 sx={{
                   height: "100%",
-                  maxWidth: "35%",
                   display: "flex",
                   alignItems: "center",
-                  justifyContent: "center"
+                  justifyContent: "center",
                 }}
               >
                 <img
@@ -115,13 +117,14 @@ export default function RulesPage({secondaryNavbar}) {
               </Grid>
               <Grid
                 item
+                xs={12}
+                sm={4.1}
                 sx={{
-                  maxWidth: "40%",
                   display: "flex",
                   flexDirection: "column",
                   justifyContent: "center",
                   gap: "10px",
-                  padding: "30px"
+                  padding: "30px",
                 }}
               >
                 <Typography variant="h3" fontWeight="bold" sx={{ marginBottom: "10px" }}>
@@ -164,11 +167,11 @@ export default function RulesPage({secondaryNavbar}) {
         <Grid item style={{ zIndex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
           <Typography
             variant="body1"
-            width="40%"
-            style={{
+            sx={{
               fontWeight: 'bold',
               color: 'rgba(200, 200, 200, 1)', // Adjust the RGB values as desired
-              textAlign: 'center'
+              textAlign: 'center',
+              width: { xs: '90%', md: '40%' } // Adjust the width based on the screen size
             }}
           >
             As you dive deeper into the world of Formula 1, don't forget you can utilize our chatbot for further inquiries regarding F1 rules, teams, and drivers. Enjoy the adrenaline-packed sport!
