@@ -145,8 +145,8 @@ export default function SimulationPage({ secondaryNavbar }) {
             justifyContent: "center",
             padding: "30px",
             borderRadius: "40px",
-            borderTop: '6px solid #d60000', // Top border color
-            borderRight: '6px solid #d60000', // Right border color
+            borderTop: '8px solid #d60000', // Top border color
+            borderRight: '8px solid #d60000', // Right border color
             borderLeft: 'none', // Hide the left border
             borderBottom: 'none' // Hide the bottom border
           }}
