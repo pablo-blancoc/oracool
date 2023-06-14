@@ -12,7 +12,7 @@ import {
 function ChatComponent() {
   const [messages, setMessages] = useState([
     {
-      message: "Hello, I'm ChatGPT! Ask me anything!",
+      message: "Hello, I'm your Oracooool formula 1 virtual asistant! Ask me anything!",
       sentTime: "just now",
       sender: "ChatGPT",
     },
@@ -39,6 +39,7 @@ function ChatComponent() {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        
       },
       body: JSON.stringify({ prompt: prompt }),
     })
