@@ -83,20 +83,62 @@ export default function LeaderboardPage({ secondaryNavbar }) {
   };
 
   return (
-    <>
+    <Box
+
+      sx={{
+        position: 'relative',
+        minHeight: '100vh',
+      }}
+    >
+
+      <Box
+        sx={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundImage: 'url("https://car-images.bauersecure.com/wp-images/3514/indy_aero_050.jpg")',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          zIndex: -1,
+        }}
+      />
       {secondaryNavbar}
 
-      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', width: '100%', marginTop: '2rem' }}>
-        <Typography variant="h4" align="left" gutterBottom style={{ width: '70%', marginLeft: '10%' }}>
-          Profile
-        </Typography>
+      <Box sx={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexDirection: 'column',
+        width: '100%',
+        marginTop: '2rem'
+      }}
+      >
         <Box sx={{ width: '60%', marginBottom: '2rem' }}>
           <TableContainer component={Paper} style={{ width: '100%' }}>
             <Table>
               <TableHead>
                 <TableRow>
-                  <TableCell>User</TableCell>
-                  <TableCell align="right">Points</TableCell>
+                  <TableCell
+                    sx={{
+                      backgroundColor: 'black',
+                      color: 'white',
+                      fontWeight: 'bold'
+                    }}
+                  >
+                    Profile
+                  </TableCell>
+                  <TableCell
+                    align="right"
+                    sx={{
+                      backgroundColor: 'black',
+                      color: 'white',
+                      fontWeight: 'bold'
+                    }}
+                  >
+                    Points
+                  </TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -270,16 +312,30 @@ export default function LeaderboardPage({ secondaryNavbar }) {
 
 
       <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', width: '100%', marginTop: '2rem' }}>
-        <Typography variant="h4" align="left" gutterBottom style={{ width: '70%', marginLeft: '10%' }}>
-          Leaderboard
-        </Typography>
         <Box sx={{ width: '60%', marginBottom: '2rem' }}>
           <TableContainer component={Paper} style={{ width: '100%' }}>
             <Table>
               <TableHead>
                 <TableRow>
-                  <TableCell>User</TableCell>
-                  <TableCell align="right">Points</TableCell>
+                  <TableCell
+                    sx={{
+                      backgroundColor: 'black',
+                      color: 'white',
+                      fontWeight: 'bold'
+                    }}
+                  >
+                    Leaderboard
+                  </TableCell>
+                  <TableCell
+                    align="right"
+                    sx={{
+                      backgroundColor: 'black',
+                      color: 'white',
+                      fontWeight: 'bold'
+                    }}
+                  >
+                    Points
+                  </TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -365,7 +421,7 @@ export default function LeaderboardPage({ secondaryNavbar }) {
           </TableContainer>
         </Box>
       </Box>
-    </>
+    </Box>
   );
 
 }

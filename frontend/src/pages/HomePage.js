@@ -15,7 +15,7 @@ const cards = [
   },
   {
     title: "Simulate",
-    imageURL: "https://www.record.com.mx/sites/default/files/styles/v2-crop768x433/public/articulos/2023/01/30/20221118_3228.jpg?itok=zvFAtAKx&changed=20230130195210",
+    imageURL: "https://cnnespanol.cnn.com/wp-content/uploads/2022/05/GettyImages-1399930547-e1653842365454.jpg?quality=100&strip=info",
     navigateTo: "/simulation"
   }
 ]

@@ -228,7 +228,6 @@ export default function SimulationPage({ secondaryNavbar }) {
           />
         </Grid>
       </Grid>
-      {/* ...rest of your code */}
     </>
   )
 }

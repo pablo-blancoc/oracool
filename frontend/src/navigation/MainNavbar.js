@@ -33,7 +33,7 @@ const navItems = [
     navigateTo: "/simulation"
   },
   {
-    title: "Leaderboard",
+    title: "Predictions",
     navigateTo: "/leaderboard"
   }
 ];
