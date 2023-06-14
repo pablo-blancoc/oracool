@@ -47,6 +47,10 @@ const data = [
 
 const navbarItems = [
   {
+    title: "Overview",
+    navigateTo: "/rules"
+  },
+  {
     title: "Grand Prix",
     navigateTo: ""
   },

@@ -21,6 +21,10 @@ import { Tabs, Tab, Menu, MenuItem } from "@mui/material";
 const drawerWidth = 240;
 const navItems = [
   {
+    title: "Home",
+    navigateTo: "/"
+  },
+  {
     title: "Rules",
     navigateTo: "/rules"
   },
