@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import styles from '@chatscope/chat-ui-kit-styles/dist/default/styles.min.css';
+import { useState } from "react";
+import styles from "@chatscope/chat-ui-kit-styles/dist/default/styles.min.css";
 import {
   MainContainer,
   ChatContainer,
@@ -7,12 +7,12 @@ import {
   Message,
   MessageInput,
   TypingIndicator,
-} from '@chatscope/chat-ui-kit-react';
+} from "@chatscope/chat-ui-kit-react";
 
 function ChatComponent() {
   const [messages, setMessages] = useState([
     {
-      message: "Hello, I'm ChatGPT! Ask me anything!",
+      message: "Hello, I'm your Oracooool formula 1 virtual asistant! Ask me anything!",
       sentTime: "just now",
       sender: "ChatGPT",
     },
@@ -22,8 +22,8 @@ function ChatComponent() {
   const handleSend = async (message) => {
     const newMessage = {
       message,
-      direction: 'outgoing',
-      sender: 'user',
+      direction: "outgoing",
+      sender: "user",
     };
 
     const newMessages = [...messages, newMessage];
@@ -35,10 +35,10 @@ function ChatComponent() {
   };
 
   async function processMessageToChatGPT(prompt) {
-    await fetch('http://0.0.0.0:5001/chatbot/send_prompt', {
-      method: 'POST',
+    await fetch("http://0.0.0.0:5001/chatbot/send_prompt", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({ prompt: prompt }),
     })
@@ -47,18 +47,13 @@ function ChatComponent() {
       })
       .then((data) => {
         console.log(data);
-        const newMessages = [
-          ...messages,
-          {
-            message: prompt,
-            sender: 'user',
-          },
+        setMessages((prevMessages) => [
+          ...prevMessages,
           {
             message: data.response,
-            sender: 'ChatGPT',
+            sender: "ChatGPT",
           },
-        ];
-        setMessages(newMessages);
+        ]);
         setIsTyping(false);
       });
   }
@@ -66,30 +61,29 @@ function ChatComponent() {
 
   return (
     <div className="App">
-      <div style={{ position: 'relative' }}>
-        <MainContainer style={{ fontSize: '.8em' }}>
-          <ChatContainer style={{ position: 'relative', minHeight: '490px' }}>
-          <MessageList
-  scrollBehavior="smooth"
-  typingIndicator={
-    isTyping ? <TypingIndicator content="ChatGPT is typing" /> : null
-  }
->
-  {messages.map((message, i) => {
-    console.log(message);
-    return (
-      <Message
-        key={i}
-        model={message}
-        position={message.sender === 'user' ? 'right' : 'left'}
-      />
-    );
-  })}
-</MessageList>
-            <MessageInput
-              placeholder="Type message here"
-              onSend={handleSend}
-            />
+      <div style={{ position: "relative" }}>
+        <MainContainer style={{ fontSize: ".8em" }}>
+          <ChatContainer style={{ position: "relative", minHeight: "490px" }}>
+            <MessageList
+              scrollBehavior="smooth"
+              typingIndicator={
+                isTyping ? (
+                  <TypingIndicator content="Oracooool is typing" />
+                ) : null
+              }
+            >
+              {messages.map((message, i) => {
+                console.log(message);
+                return (
+                  <Message
+                    key={i}
+                    model={message}
+                    position={message.sender === "user" ? "right" : "left"}
+                  />
+                );
+              })}
+            </MessageList>
+            <MessageInput placeholder="Type message here" onSend={handleSend} />
           </ChatContainer>
         </MainContainer>
       </div>
