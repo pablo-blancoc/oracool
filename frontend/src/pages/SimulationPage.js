@@ -20,7 +20,7 @@ import oracoooolAPI from '../api/oracoooolAPI';
 export default function SimulationPage({ secondaryNavbar }) {
 
   const [selectedTrackId, setSelectedTrackId] = useState(null);
-  const [results, setResults] = useState([]);
+  const [results, setResults] = useState(null);
 
   const [trackOptions, setTrackOptions] = useState(null);
 
@@ -138,26 +138,28 @@ export default function SimulationPage({ secondaryNavbar }) {
             </Grid>
 
 
-            <Grid item>
-              <TableContainer component={Paper} style={{ minWidth: '340px' }}>
-                <Table>
-                  <TableHead>
-                    <TableRow>
-                      <TableCell>Position</TableCell>
-                      <TableCell>Pilot Name</TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {results.map((row, index) => (
-                      <TableRow key={row.driver.id}>
-                        <TableCell>{index + 1}</TableCell>
-                        <TableCell>{row.driver.name}</TableCell>
+            {results &&
+              <Grid item>
+                <TableContainer component={Paper} style={{ minWidth: '340px' }}>
+                  <Table>
+                    <TableHead>
+                      <TableRow>
+                        <TableCell>Position</TableCell>
+                        <TableCell>Driver Name</TableCell>
                       </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </TableContainer>
-            </Grid>
+                    </TableHead>
+                    <TableBody>
+                      {results.map((row, index) => (
+                        <TableRow key={row.driver.id}>
+                          <TableCell>{index + 1}</TableCell>
+                          <TableCell>{row.driver.name}</TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+              </Grid>
+            }
 
 
           </Grid>
@@ -197,7 +199,7 @@ export default function SimulationPage({ secondaryNavbar }) {
             How can you create your own scenario?
           </Typography>
           <Typography variant="body2">
-            To create your own scenario in a Formula 1 simulator, choose a track, select a pilot, set parameters, simulate the race, and view the prediction. Optional: Customize and iterate.
+            To create your own scenario in a Formula 1 simulator, choose a track, select a driver, set parameters, simulate the race, and view the prediction. Optional: Customize and iterate.
           </Typography>
         </Grid>
         <Grid
