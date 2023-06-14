@@ -17,16 +17,12 @@ import {
 } from "@mui/material";
 import oracoooolAPI from '../api/oracoooolAPI';
 
-
-
-
 export default function SimulationPage({ secondaryNavbar }) {
 
   const [selectedTrackId, setSelectedTrackId] = useState(null);
   const [results, setResults] = useState([]);
 
   const [trackOptions, setTrackOptions] = useState(null);
-  const [trackOptionsAreLoading, setTrackOptionsAreLoading] = useState(true)
 
   const handleTrackSelect = (event) => {
     setSelectedTrackId(event.target.value);

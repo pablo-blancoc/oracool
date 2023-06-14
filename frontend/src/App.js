@@ -38,7 +38,7 @@ export default function App() {
       <MainNavbar />
       <Routes>
         <Route path="/" exact element={<HomePage secondaryNavbar={<SecondaryNavbar/>}/>} />
-        <Route path="/signin" element={<SignInPage secondaryNavbar={<SecondaryNavbar/>}/>} />
+        <Route path="/signin" element={<SignInPage />} />
         <Route path="/rules" element={<RulesPage secondaryNavbar={<SecondaryNavbar tabItems={rulesNavbarItems}/>}/>} />
         <Route path="/simulation" element={<SimulationPage secondaryNavbar={<SecondaryNavbar/>}/>}/>
         <Route path="/predictions" element={<PredictionsPage secondaryNavbar={<SecondaryNavbar/>}/>} />

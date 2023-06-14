@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Accordion,
   AccordionSummary,
@@ -21,6 +21,7 @@ import {
   InputLabel,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import oracoooolAPI from '../api/oracoooolAPI';
 
 // Sample data
 const leaderboardData = [
@@ -37,12 +38,6 @@ const user = [
 // Se tiene que hacer sort de los puntos para el leaderboard
 leaderboardData.sort((a, b) => b.points - a.points);
 
-// Cambiar a que sean del query
-const trackOptions = [
-  { id: 1, name: 'Track 1' },
-  { id: 2, name: 'Track 2' }
-];
-
 const pilots = [
   { id: 1, name: 'Pilot 1' },
   { id: 2, name: 'Pilot 2' },
@@ -52,19 +47,27 @@ const pilots = [
 ];
 
 export default function PredictionsPage({ secondaryNavbar }) {
-
   const [selectedTrackId, setSelectedTrackId] = useState(null);
   const [results, setResults] = useState([]);
+
+  const [trackOptions, setTrackOptions] = useState(null);
 
   const handleTrackSelect = (event) => {
     setSelectedTrackId(event.target.value);
   };
 
   const handlePredictClick = async () => {
-    // Reemplazar con query
-    const response = await fetch(`http://your-api-url/predict?trackId=${selectedTrackId}`);
-    const data = await response.json();
-    setResults(data);
+    try {
+      const response = await oracoooolAPI.get(`/model/${selectedTrackId}`); // make API call
+      const rawData = await response.data;
+      if (rawData) { // if property was found
+        setResults(rawData.prediction)
+      } else {
+        throw new Error(`Response has no property 'data'`); // raise error explaining property couldn't be found
+      }
+    } catch (error) {
+      console.error(error); // raise error explaining inability to connect to the endpoint 
+    }
   };
 
   const handleMakePredictionClick = async () => {
@@ -81,6 +84,35 @@ export default function PredictionsPage({ secondaryNavbar }) {
     newSelectedPilots[index] = pilotId;
     setSelectedPilots(newSelectedPilots);
   };
+
+  useEffect(() => {
+    const getTracks = async () => {
+      try {
+        const response = await oracoooolAPI.get("/circuits"); // make API call
+        const rawData = await response.data; // extract property
+        if (rawData) { // if property was found
+          setTrackOptions(rawData["circuits"])
+        } else {
+          throw new Error(`Response has no property 'data'`); // raise error explaining property couldn't be found
+        }
+      } catch (error) {
+        console.error(error); // raise error explaining inability to connect to the endpoint 
+      }
+    };
+
+    // Main call:
+    const makeRequests = async () => {
+      try {
+        await Promise.all([ // ensures all the calls are finished before proceeding
+          getTracks()
+        ]);
+      } catch (error) {
+        console.error(error); // handle error
+      }
+    };
+
+    makeRequests(); // make main call
+  }, []);
 
   return (
     <Box
@@ -175,16 +207,19 @@ export default function PredictionsPage({ secondaryNavbar }) {
                                   <Grid item>
                                     <Select
                                       value={selectedTrackId || ''}
+                                      disabled={!trackOptions}
                                       onChange={handleTrackSelect}
                                       displayEmpty
                                       style={{ width: 160, marginRight: '10px' }}
                                     >
 
                                       <MenuItem disabled value="">
-                                        <em style={{ color: 'lightgray' }}>Select Track</em>
+                                        <em style={{ color: 'lightgray' }}>
+                                          {trackOptions ? "Select Track" : "Loading Tracks"}
+                                        </em>
                                       </MenuItem>
 
-                                      {trackOptions.map((track) => (
+                                      {trackOptions && trackOptions.map((track) => (
                                         <MenuItem key={track.id} value={track.id}>{track.name}</MenuItem>
                                       ))}
                                     </Select>
@@ -200,7 +235,7 @@ export default function PredictionsPage({ secondaryNavbar }) {
                                   </Grid>
 
                                   <Grid item container spacing={3} direction="column" marginTop={"5px"}>
-                                    {selectedPilots.map((pilotId, index) => (
+                                    {selectedPilots && selectedPilots.map((pilotId, index) => (
                                       <Grid item key={index} xs={4} marginTop={"5px"}>
                                         <FormControl fullWidth>
                                           <InputLabel>{`Select pilot for ${index + 1} position`}</InputLabel>
@@ -254,7 +289,7 @@ export default function PredictionsPage({ secondaryNavbar }) {
                                         <em style={{ color: 'lightgray' }}>Select Track</em>
                                       </MenuItem>
 
-                                      {trackOptions.map((track) => (
+                                      {trackOptions && trackOptions.map((track) => (
                                         <MenuItem key={track.id} value={track.id}>{track.name}</MenuItem>
                                       ))}
                                     </Select>
@@ -281,7 +316,7 @@ export default function PredictionsPage({ secondaryNavbar }) {
                                         </TableRow>
                                       </TableHead>
                                       <TableBody>
-                                        {results.map((row, index) => (
+                                        {results && results.map((row, index) => (
                                           <TableRow key={row.pilotId}>
                                             <TableCell>{index + 1}</TableCell>
                                             <TableCell>{row.pilotName}</TableCell>
@@ -339,7 +374,7 @@ export default function PredictionsPage({ secondaryNavbar }) {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {leaderboardData.map((row) => (
+                {leaderboardData && leaderboardData.map((row) => (
                   <TableRow key={row.id}>
                     <TableCell>
                       <Accordion>
@@ -371,7 +406,7 @@ export default function PredictionsPage({ secondaryNavbar }) {
                                     <em style={{ color: 'lightgray' }}>Select Track</em>
                                   </MenuItem>
 
-                                  {trackOptions.map((track) => (
+                                  {trackOptions && trackOptions.map((track) => (
                                     <MenuItem key={track.id} value={track.id}>{track.name}</MenuItem>
                                   ))}
                                 </Select>
@@ -398,7 +433,7 @@ export default function PredictionsPage({ secondaryNavbar }) {
                                       </TableRow>
                                     </TableHead>
                                     <TableBody>
-                                      {results.map((row, index) => (
+                                      {results && results.map((row, index) => (
                                         <TableRow key={row.pilotId}>
                                           <TableCell>{index + 1}</TableCell>
                                           <TableCell>{row.pilotName}</TableCell>
