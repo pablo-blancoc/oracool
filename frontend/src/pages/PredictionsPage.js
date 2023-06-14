@@ -51,7 +51,7 @@ const pilots = [
   { id: 5, name: 'Pilot 5' },
 ];
 
-export default function LeaderboardPage({ secondaryNavbar }) {
+export default function PredictionsPage({ secondaryNavbar }) {
 
   const [selectedTrackId, setSelectedTrackId] = useState(null);
   const [results, setResults] = useState([]);

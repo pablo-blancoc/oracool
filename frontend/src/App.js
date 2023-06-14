@@ -7,11 +7,10 @@ import HomePage from './pages/HomePage';
 import SignInPage from './pages/SignInPage';
 import RulesPage from './pages/RulesPage';
 import SimulationPage from './pages/SimulationPage';
-import LeaderboardPage from './pages/LeaderboardPage';
+import PredictionsPage from './pages/PredictionsPage';
 import GrandPrixPage from './pages/GrandPrixPage';
 import DriversPage from './pages/DriversPage';
 import TeamsPage from './pages/TeamsPage';
-import HistoricalDataPage from './pages/HistoricalDataPage';
 
 const rulesNavbarItems = [
   {
@@ -30,10 +29,6 @@ const rulesNavbarItems = [
     title: "Teams",
     navigateTo: "/teams"
   },
-  {
-    title: "Historical Data",
-    navigateTo: "/historicalData"
-  }
 
 ]
 
@@ -46,11 +41,10 @@ export default function App() {
         <Route path="/signin" element={<SignInPage secondaryNavbar={<SecondaryNavbar/>}/>} />
         <Route path="/rules" element={<RulesPage secondaryNavbar={<SecondaryNavbar tabItems={rulesNavbarItems}/>}/>} />
         <Route path="/simulation" element={<SimulationPage secondaryNavbar={<SecondaryNavbar/>}/>}/>
-        <Route path="/leaderboard" element={<LeaderboardPage secondaryNavbar={<SecondaryNavbar/>}/>} />
+        <Route path="/predictions" element={<PredictionsPage secondaryNavbar={<SecondaryNavbar/>}/>} />
         <Route path="/grandprix" element={<GrandPrixPage secondaryNavbar={<SecondaryNavbar tabItems={rulesNavbarItems}/>}/>} />
         <Route path="/drivers" element={<DriversPage secondaryNavbar={<SecondaryNavbar tabItems={rulesNavbarItems}/>}/>} />
         <Route path="/teams" element={<TeamsPage secondaryNavbar={<SecondaryNavbar tabItems={rulesNavbarItems}/>}/>} />
-        <Route path="/historicalData" element={<HistoricalDataPage secondaryNavbar={<SecondaryNavbar tabItems={rulesNavbarItems}/>}/>} />
       </Routes>
     </Router>
   );
