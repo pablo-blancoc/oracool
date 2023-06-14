@@ -35,7 +35,7 @@ export default function SimulationPage({secondaryNavbar}){
   };
 
   const handlePredictClick = async () => {
-    // You would have to replace this with your AJAX request to your backend service.
+    // Reemplazar con query
     const response = await fetch(`http://your-api-url/predict?trackId=${selectedTrackId}`);
     const data = await response.json();
     setResults(data);
@@ -154,7 +154,7 @@ export default function SimulationPage({secondaryNavbar}){
           }}
         >
           <Typography variant="body1" fontWeight="bold">
-            How does Oracle allows you to predict results?
+            How does Oracle allow you to predict results?
           </Typography>
           <Typography variant="body2">
             Oracle allows you to predict results by leveraging various machine learning models through Oracle Cloud. These models are utilized to analyze data, identify patterns, and make accurate predictions based on the provided information. By leveraging the power of Oracle's cloud infrastructure and machine learning capabilities, users can access advanced prediction functionalities for a wide range of applications and industries.

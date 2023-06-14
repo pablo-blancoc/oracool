@@ -20,8 +20,8 @@ const cards = [
   }
 ]
 
-export default function HomePage({secondaryNavbar}) {
-  
+export default function HomePage({ secondaryNavbar }) {
+
   const navigate = useNavigate();
 
   return (
@@ -31,7 +31,7 @@ export default function HomePage({secondaryNavbar}) {
         container
         alignItems="center"
         justifyContent="center"
-        minHeight="350px"
+        minHeight="475px"
         sx={{
           background: `url(https://upload.wikimedia.org/wikipedia/commons/b/b0/FIA_F1_Austria_2018_Nr._3_Ricciardo.jpg)`,
           backgroundPosition: 'center',
@@ -47,9 +47,9 @@ export default function HomePage({secondaryNavbar}) {
       <Grid
         container
         alignItems="center"
-        minHeight="250px"
+        minHeight="calc(100vh - 550px)"
         spacing={2}
-        sx={{ backgroundColor: "#242424" }}
+        sx={{ backgroundColor: "#18141c" }}
       >
         {
           cards.map((obj, ind) => (
@@ -68,7 +68,10 @@ export default function HomePage({secondaryNavbar}) {
               >
                 <Grid
                   item
-                  sx={{ width: "80%" }}
+                  sx={{
+                    width: "87%"
+
+                  }}
                 >
                   <Grid
                     container
@@ -76,8 +79,8 @@ export default function HomePage({secondaryNavbar}) {
                     justifyContent="center"
                     sx={{
                       height: "200px",
-                      borderRadius: "50px",
-                      boxShadow: "inset 0px 0px 14px 4px rgba(245, 245, 245, 0.5), inset 0px -3px 6px",
+                      borderRadius: "10px",
+                      boxShadow: "inset 0px 0px 14px 4px rgba(200, 0, 7, 0.8), inset 0px -3px 6px rgba(200, 0, 7, 0.1)",
                       "&:hover": {
                         cursor: "pointer"
                       },
@@ -90,8 +93,8 @@ export default function HomePage({secondaryNavbar}) {
                     onClick={() => (navigate(obj.navigateTo))}
                   >
                     <Grid item>
-                      <Typography variant="h5" fontWeight="bold">
-                        {obj.title}
+                      <Typography variant="body1" style={{ fontSize: '28px' }} fontWeight="bold">
+                      {obj.title}
                       </Typography>
                     </Grid>
                   </Grid>
