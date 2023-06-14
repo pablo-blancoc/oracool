@@ -47,30 +47,45 @@ function ChatComponent() {
       })
       .then((data) => {
         console.log(data);
-        setMessages([...messages, {
-          message: data.response,
-          sender: 'ChatGPT',
-        }]);
+        const newMessages = [
+          ...messages,
+          {
+            message: prompt,
+            sender: 'user',
+          },
+          {
+            message: data.response,
+            sender: 'ChatGPT',
+          },
+        ];
+        setMessages(newMessages);
         setIsTyping(false);
       });
   }
+  
 
   return (
     <div className="App">
       <div style={{ position: 'relative' }}>
         <MainContainer style={{ fontSize: '.8em' }}>
           <ChatContainer style={{ position: 'relative', minHeight: '490px' }}>
-            <MessageList
-              scrollBehavior="smooth"
-              typingIndicator={
-                isTyping ? <TypingIndicator content="ChatGPT is typing" /> : null
-              }
-            >
-              {messages.map((message, i) => {
-                console.log(message);
-                return <Message key={i} model={message} />;
-              })}
-            </MessageList>
+          <MessageList
+  scrollBehavior="smooth"
+  typingIndicator={
+    isTyping ? <TypingIndicator content="ChatGPT is typing" /> : null
+  }
+>
+  {messages.map((message, i) => {
+    console.log(message);
+    return (
+      <Message
+        key={i}
+        model={message}
+        position={message.sender === 'user' ? 'right' : 'left'}
+      />
+    );
+  })}
+</MessageList>
             <MessageInput
               placeholder="Type message here"
               onSend={handleSend}
