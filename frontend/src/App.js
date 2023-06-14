@@ -47,5 +47,6 @@ export default function App() {
         <Route path="/teams" element={<TeamsPage secondaryNavbar={<SecondaryNavbar tabItems={rulesNavbarItems}/>}/>} />
       </Routes>
     </Router>
+  
   );
 }
