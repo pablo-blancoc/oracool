@@ -2,13 +2,12 @@
 import React from 'react';
 import TeamTable from '../components/TeamsTable';
 
-const TeamsPage = () => {
+export default function TeamsPage({secondaryNavbar}){
     return (
-      <div>
+      <>
+        {secondaryNavbar}
         <h1>Teams Page</h1>
         <TeamTable />
-      </div>
+      </>
     );
   };
-  
-  export default TeamsPage;

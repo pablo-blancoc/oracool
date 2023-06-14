@@ -13,12 +13,17 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import PersonIcon from '@mui/icons-material/Person';
-import { useNavigate } from 'react-router-dom';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
+import { Tabs, Tab, Menu, MenuItem } from "@mui/material";
 
 const drawerWidth = 240;
 const navItems = [
+  {
+    title: "Home",
+    navigateTo: "/"
+  },
   {
     title: "Rules",
     navigateTo: "/rules"
@@ -28,11 +33,10 @@ const navItems = [
     navigateTo: "/simulation"
   },
   {
-    title: "Leaderboard",
-    navigateTo: "/leaderboard"
+    title: "Predictions",
+    navigateTo: "/predictions"
   }
 ];
-
 
 const DrawerHeader = styled('div')(({ theme }) => ({
   display: 'flex',
@@ -47,9 +51,36 @@ export default function MainNavbar(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
+
+  function getActiveTabIndex(){
+    var activeTabIndex = false
+    navItems.map((obj, index) => {
+      if (location.pathname === obj.navigateTo){
+        activeTabIndex = index;
+        return;
+      }
+    });
+    return activeTabIndex
+  }
+
+  const [value, setValue] = React.useState(getActiveTabIndex());
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
+  };
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleMenu = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
   };
 
   const drawer = (
@@ -84,35 +115,70 @@ export default function MainNavbar(props) {
         <Toolbar>
           <Box
             sx={{ flexGrow: 1 }}
-            onClick={() => { navigate("/") }}
           >
-            <img src="oracle_logo.svg" width="100px" alt="Oracle Logo"></img>
+            <img
+              src="oracle_logo.svg"
+              width="100px"
+              alt="Oracle Logo"
+              onClick={() => { navigate("/") }}
+            >
+            </img>
           </Box>
-          <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
-            {navItems.map((item) => (
-              <Button key={item.title} sx={{ color: 'black' }} onClick={() => {
-                navigate(item.navigateTo)
-              }}>
-                {item.title}
-              </Button>
-            ))}
-          </Box>
-          <Button variant="contained" startIcon={<PersonIcon />}
-            sx={{
-              // display: { sm: "none" }
+          <Tabs
+            value={value}
+            onChange={handleChange}
+            variant="scrollable"
+            scrollButtons
+            allowScrollButtonsMobile
+            TabScrollButtonProps={{
+              sx: {
+                color: "black"
+              }
             }}
-            onClick={() => (navigate("/signin"))}
           >
-            Sign In
-          </Button>
+            {
+              navItems.map((item, index) => (
+                <Tab
+                  key={`${index}-${item.title}`}
+                  label={item.title}
+                  onClick={() => { navigate(item.navigateTo) }}
+                />
+              ))
+            }
+          </Tabs>
           <IconButton
-            sx={{
-              display: { sm: 'none' }
-            }}
+            sx={{ padding: 0 }}
+            onClick={handleMenu}
           >
-            <PersonIcon sx={{ color: 'black' }} />
+            <AccountCircleIcon
+              fontSize='large'
+              sx={{ color: 'black' }}
+            />
           </IconButton>
-          <IconButton
+          <Menu
+            id="menu-appbar"
+            anchorEl={anchorEl}
+            anchorOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+            }}
+            keepMounted
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+            }}
+            open={Boolean(anchorEl)}
+            onClose={handleClose}
+          >
+            <MenuItem 
+              onClick={() => {
+                handleClose()
+                navigate("/signin")
+              }}
+            >Sign In</MenuItem>
+            <MenuItem onClick={handleClose}>Create Account</MenuItem>
+          </Menu>
+          {/* <IconButton
             color="inherit"
             aria-label="open drawer"
             edge="start"
@@ -123,7 +189,7 @@ export default function MainNavbar(props) {
             }}
           >
             <MenuIcon sx={{ color: "black" }} />
-          </IconButton>
+          </IconButton> */}
         </Toolbar>
       </AppBar>
       <Box component="nav">

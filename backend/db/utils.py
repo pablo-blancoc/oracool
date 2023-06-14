@@ -1,5 +1,12 @@
 from shared import format_exception
-from db.objects import Driver, Team, Group, User, Circuit
+from db.objects import (
+    Driver,
+    Team,
+    Group,
+    User,
+    Circuit,
+    NextResult,
+)
 import uuid
 
 
@@ -115,3 +122,23 @@ def tuple_to_circuit(data: tuple) -> Circuit:
         return None
 
     return circuit
+
+
+def tuple_to_next_result(data: tuple) -> NextResult:
+    if data is None:
+        return None
+
+    try:
+        if data[0] is None:
+            return None
+
+        next_result = NextResult()
+        next_result.circuit = uuid.UUID(data[0])
+        next_result.driver = uuid.UUID(data[1])
+        next_result.prediction = int(data[2])
+
+    except Exception as err:
+        print(format_exception(err))
+        return None
+
+    return next_result

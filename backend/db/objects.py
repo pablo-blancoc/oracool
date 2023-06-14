@@ -104,11 +104,32 @@ class Circuit:
 
     def d(self) -> dict:
         return {
-            "id": self.id,
+            "id": self.id.hex,
             "name": self.name,
             "description": self.description,
             "country": self.country,
             "city": self.city,
             "image": self.image,
             "length": self.length,
+        }
+
+
+class NextResult:
+
+    num_attrs = 3
+
+    def __init__(self):
+        self.driver: Union[uuid.UUID, Driver] = None
+        self.circuit: Union[uuid.UUID, Circuit] = None
+        self.prediction: int = None
+
+    def d(self) -> dict:
+        return {
+            "driver": self.driver.d() 
+            if isinstance(self.driver, Driver) 
+            else self.driver.hex,
+            "circuit": self.circuit.d() 
+            if isinstance(self.circuit, Circuit) 
+            else self.circuit.hex,
+            "prediction": self.prediction
         }

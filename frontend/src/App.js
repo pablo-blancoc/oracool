@@ -7,27 +7,44 @@ import HomePage from './pages/HomePage';
 import SignInPage from './pages/SignInPage';
 import RulesPage from './pages/RulesPage';
 import SimulationPage from './pages/SimulationPage';
-import LeaderboardPage from './pages/LeaderboardPage';
+import PredictionsPage from './pages/PredictionsPage';
 import GrandPrixPage from './pages/GrandPrixPage';
 import DriversPage from './pages/DriversPage';
 import TeamsPage from './pages/TeamsPage';
-import HistoricalDataPage from './pages/HistoricalDataPage';
-import Popup from './components/Popup';
+
+const rulesNavbarItems = [
+  {
+    title: "Overview",
+    navigateTo: "/rules"
+  },
+  {
+    title: "Grand Prix",
+    navigateTo: "/grandprix"
+  },
+  {
+    title: "Drivers",
+    navigateTo: "/drivers"
+  },
+  {
+    title: "Teams",
+    navigateTo: "/teams"
+  },
+
+]
 
 export default function App() {
   return (
     <Router>
       <MainNavbar />
       <Routes>
-        <Route path="/" exact element={<HomePage />} />
-        <Route path="/signin" element={<SignInPage />} />
-        <Route path="/rules" element={<RulesPage />} />
-        <Route path="/simulation" element={<SimulationPage />} />
-        <Route path="/leaderboard" element={<LeaderboardPage />} />
-        <Route path="/grandprix" element={<GrandPrixPage />} />
-        <Route path="/drivers" element={<DriversPage />} />
-        <Route path="/teams" element={<TeamsPage />} />
-        <Route path="/historical-data" element={<HistoricalDataPage />} />
+        <Route path="/" exact element={<HomePage secondaryNavbar={<SecondaryNavbar/>}/>} />
+        <Route path="/signin" element={<SignInPage secondaryNavbar={<SecondaryNavbar/>}/>} />
+        <Route path="/rules" element={<RulesPage secondaryNavbar={<SecondaryNavbar tabItems={rulesNavbarItems}/>}/>} />
+        <Route path="/simulation" element={<SimulationPage secondaryNavbar={<SecondaryNavbar/>}/>}/>
+        <Route path="/predictions" element={<PredictionsPage secondaryNavbar={<SecondaryNavbar/>}/>} />
+        <Route path="/grandprix" element={<GrandPrixPage secondaryNavbar={<SecondaryNavbar tabItems={rulesNavbarItems}/>}/>} />
+        <Route path="/drivers" element={<DriversPage secondaryNavbar={<SecondaryNavbar tabItems={rulesNavbarItems}/>}/>} />
+        <Route path="/teams" element={<TeamsPage secondaryNavbar={<SecondaryNavbar tabItems={rulesNavbarItems}/>}/>} />
       </Routes>
     </Router>
   

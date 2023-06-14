@@ -43,3 +43,23 @@ WHERE
 """
 
 GET_ALL_CIRCUITS = "SELECT * FROM circuits"
+
+PREDICT_CIRCUIT = """
+SELECT 
+    next_results.*, 
+    drivers.id AS did,
+    drivers.name AS dname,
+    drivers.team AS dteam,
+    drivers.nationality AS dnationality,
+    drivers.description AS ddescription,
+    drivers.image AS dimage,
+    drivers.link AS dlink
+FROM 
+    next_results
+LEFT JOIN
+    drivers
+ON
+    next_results.driver = drivers.id
+WHERE 
+    circuit = %s;
+"""
