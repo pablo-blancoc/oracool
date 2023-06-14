@@ -1,7 +1,29 @@
-import { Box, Grid } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import SecondaryNavbar from "../components/SecondaryNavbar";
+import { useNavigate } from 'react-router-dom';
+
+const cards = [
+  {
+    title: "Learn More",
+    imageURL: "https://ausuaebc.com/wp-content/uploads/2021/11/ScaileCar_Dot.jpg.webp",
+    navigateTo: "/rules"
+  },
+  {
+    title: "Predict Results",
+    imageURL: "https://storage.googleapis.com/afs-prod/media/e5cd8998849449e6956e370c0e22be2b/1000.jpeg",
+    navigateTo: "/"
+  },
+  {
+    title: "Simulate",
+    imageURL: "https://www.record.com.mx/sites/default/files/styles/v2-crop768x433/public/articulos/2023/01/30/20221118_3228.jpg?itok=zvFAtAKx&changed=20230130195210",
+    navigateTo: "/simulation"
+  }
+]
 
 export default function HomePage() {
+  
+  const navigate = useNavigate();
+
   return (
     <>
       <SecondaryNavbar />
@@ -28,51 +50,55 @@ export default function HomePage() {
         minHeight="250px"
         sx={{ backgroundColor: "#242424" }}
       >
-        <Grid
-          item
-          sx={{ color: "white", border: "1px solid magenta" }}
-          xs={12} sm={6} md={4}
-        >
-          <Grid
-            container
-            alignItems="center"
-            justifyContent="center"
-          >
-            <Grid item sx={{border: "1px solid wheat"}}>
-              popo
+        {
+          cards.map((obj, ind) => (
+            <Grid
+              key={`${ind}-${obj.title}`}
+              item
+              sx={{
+                color: "white"
+              }}
+              xs={12} sm={6} md={4}
+            >
+              <Grid
+                container
+                alignItems="center"
+                justifyContent="center"
+              >
+                <Grid
+                  item
+                  sx={{ width: "80%" }}
+                >
+                  <Grid
+                    container
+                    alignItems="center"
+                    justifyContent="center"
+                    sx={{
+                      height: "200px",
+                      borderRadius: "50px",
+                      boxShadow: "0px 2px 2px 0px rgba(0, 0, 0, 0.5), inset 0px -3px 6px -2px rgba(0, 0, 0, 0.3)",
+                      "&:hover": {
+                        cursor: "pointer"
+                      },
+                      background: `url(${obj.imageURL})`,
+                      backgroundPosition: 'center',
+                      backgroundRepeat: 'no-repeat',
+                      backgroundSize: 'cover',
+                      objectFit: 'cover'
+                    }}
+                    onClick={() => (navigate(obj.navigateTo))}
+                  >
+                    <Grid item>
+                      <Typography variant="h5" fontWeight="bold">
+                        {obj.title}
+                      </Typography>
+                    </Grid>
+                  </Grid>
+                </Grid>
+              </Grid>
             </Grid>
-          </Grid>
-        </Grid>
-        <Grid
-          item
-          sx={{ color: "white", border: "1px solid magenta" }}
-          xs={12} sm={6} md={4}
-        >
-          <Grid
-            container
-            alignItems="center"
-            justifyContent="center"
-          >
-            <Grid item sx={{border: "1px solid wheat"}}>
-              popo
-            </Grid>
-          </Grid>
-        </Grid>
-        <Grid
-          item
-          sx={{ color: "white", border: "1px solid magenta" }}
-          xs={12} sm={6} md={4}
-        >
-          <Grid
-            container
-            alignItems="center"
-            justifyContent="center"
-          >
-            <Grid item sx={{border: "1px solid wheat"}}>
-              popo
-            </Grid>
-          </Grid>
-        </Grid>
+          ))
+        }
       </Grid>
     </>
   )

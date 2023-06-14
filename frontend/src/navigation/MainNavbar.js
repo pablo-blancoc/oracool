@@ -105,13 +105,13 @@ export default function MainNavbar(props) {
           >
             Sign In
           </Button>
-          <IconButton
+          {/* <IconButton
             sx={{
               display: { sm: 'none' }
             }}
           >
             <PersonIcon sx={{ color: 'black' }} />
-          </IconButton>
+          </IconButton> */}
           <IconButton
             color="inherit"
             aria-label="open drawer"
