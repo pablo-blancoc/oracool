@@ -83,4 +83,22 @@ def get_all_users_from_group(group_id: uuid.UUID) -> list[User]:
     
     except Exception as err:
         print(err)
-        return False
+        return []
+
+
+def get_all_users() -> list[User]:
+    try:
+        q = queries.GET_ALL_USERS_ORDERED_BY_POINTS
+        data = tuple()
+        results = None
+
+        with db_cursor() as cur:
+            cur.execute(q, data)
+            results = cur.fetchall()
+
+        return [tuple_to_user(result) for result in results]
+    
+    except Exception as err:
+        print(err)
+        return []
+

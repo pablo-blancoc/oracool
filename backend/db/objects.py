@@ -88,6 +88,13 @@ class User:
             "points": self.points,
         }
 
+    def d_minor(self) -> dict:
+        return {
+            "id": self.id.hex,
+            "name": self.name,
+            "points": self.points,
+        }
+
 
 class Circuit:
 
@@ -132,4 +139,25 @@ class NextResult:
             if isinstance(self.circuit, Circuit) 
             else self.circuit.hex,
             "prediction": self.prediction
+        }
+
+
+class Prediction:
+
+    num_attrs = 3
+
+    def __init__(self):
+        self.id: uuid.UUID = None
+        self.userid: uuid.UUID = None
+        self.circuit: uuid.UUID = None
+        self.year: int = None
+        self.results: int = None
+
+    def d(self) -> dict:
+        return {
+            "id": self.id.hex,
+            "userid": self.userid.hex,
+            "circuit": self.circuit.hex,
+            "year": self.year,
+            "results": self.results
         }

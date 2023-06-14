@@ -63,3 +63,11 @@ ON
 WHERE 
     circuit = %s;
 """
+
+GET_ALL_USERS_ORDERED_BY_POINTS = "SELECT * FROM USERS ORDER BY points"
+
+SAVE_PREDS = "INSERT INTO predictions(userid,circuit,year,results) VALUES(%s, %s, 2023, %s)"
+
+UPDATE_USER_POINTS = "UPDATE users SET points = points + %s WHERE id = %s"
+
+GET_PREDICTION_FROM_USER = "SELECT * FROM predictions WHERE userid = %s AND circuit = %s"
