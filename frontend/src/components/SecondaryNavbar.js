@@ -10,7 +10,6 @@ export default function SecondaryNavbar(props) {
       minHeight="70px"
       sx={{ backgroundColor: "#d60000" }}
     >
-      content
     </Grid>
   )
 }
