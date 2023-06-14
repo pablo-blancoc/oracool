@@ -49,7 +49,15 @@ export default function HomePage({ secondaryNavbar }) {
         alignItems="center"
         minHeight="calc(100vh - 550px)"
         spacing={2}
-        sx={{ backgroundColor: "#18141c" }}
+        sx=
+        {{
+          backgroundColor: "#18141c",
+          borderRadius: "22px",
+          borderTop: '8px solid #d60000', // Top border color
+          borderRight: '8px solid #d60000', // Right border color
+          borderLeft: 'none', // Hide the left border
+          borderBottom: 'none' // Hide the bottom border
+        }}
       >
         {
           cards.map((obj, ind) => (
@@ -57,7 +65,7 @@ export default function HomePage({ secondaryNavbar }) {
               key={`${ind}-${obj.title}`}
               item
               sx={{
-                color: "white"
+                color: "white",
               }}
               xs={12} sm={6} md={4}
             >
@@ -80,7 +88,7 @@ export default function HomePage({ secondaryNavbar }) {
                     sx={{
                       height: "200px",
                       borderRadius: "10px",
-                      boxShadow: "inset 0px 0px 14px 4px rgba(200, 0, 7, 0.8), inset 0px -3px 6px rgba(200, 0, 7, 0.1)",
+                      // boxShadow: "inset 0px 0px 14px 4px rgba(200, 0, 7, 0.8), inset 0px -3px 6px rgba(200, 0, 7, 0.1)",
                       "&:hover": {
                         cursor: "pointer"
                       },
@@ -94,7 +102,7 @@ export default function HomePage({ secondaryNavbar }) {
                   >
                     <Grid item>
                       <Typography variant="body1" style={{ fontSize: '28px' }} fontWeight="bold">
-                      {obj.title}
+                        {obj.title}
                       </Typography>
                     </Grid>
                   </Grid>
