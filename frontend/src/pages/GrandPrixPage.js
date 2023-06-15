@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Grid,
   Typography,
@@ -6,54 +6,49 @@ import {
   Container,
   Select,
   MenuItem,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Paper,
   Box,
 } from "@mui/material";
 
-
-// Cambiar a que sean del query
-const trackOptions = [
-  { id: 1, name: 'Track 1' },
-  { id: 2, name: 'Track 2' }
-];
-
-const trackDetails = [
-  {
-    id: 1,
-    city: "Mexico city",
-    country: 'Mexico',
-    description: 'description of the Grand Prix',
-    image: "https://media.formula1.com/image/upload/content/dam/fom-website/2018-redesign-assets/Circuit%20maps%2016x9/Mexico_Circuit.png.transform/6col-retina/image.png",
-    length: 5.303,
-    name: 'Mexico City Grand Prix'
-  },
-];
-
 export default function SimulationPage({ secondaryNavbar }) {
+  const [selectedTrackId, setSelectedTrackId] = useState('');
+  const [trackOptions, setTrackOptions] = useState([]);
+  const [trackDetails, setTrackDetails] = useState({});
 
-  const [selectedTrackId, setSelectedTrackId] = useState(null);
-  const [results, setResults] = useState([]);
+  useEffect(() => {
+    async function fetchCircuits() {
+      try {
+        const response = await fetch('http://0.0.0.0:5001/circuits');
+        if (response.ok) {
+          const data = await response.json();
+          const circuits = data.circuits || [];
+          setTrackOptions(circuits);
+        } else {
+          console.error('Error fetching circuits:', response.status);
+        }
+      } catch (error) {
+        console.error('Error fetching circuits:', error);
+      }
+    }
+
+    fetchCircuits();
+  }, []);
 
   const handleTrackSelect = (event) => {
     setSelectedTrackId(event.target.value);
+    const selectedTrack = trackOptions.find((track) => track.id === event.target.value);
+    setTrackDetails(selectedTrack);
   };
 
   const handlePredictClick = async () => {
-    // Reemplazar con query
-    const response = await fetch(`http://your-api-url/predict?trackId=${selectedTrackId}`);
-    const data = await response.json();
-    setResults(data);
+    if (selectedTrackId) {
+      // Perform the desired action with the selected track
+    }
   };
 
   return (
     <>
       {secondaryNavbar}
+
       <Grid
         container
         alignItems="center"
@@ -69,15 +64,14 @@ export default function SimulationPage({ secondaryNavbar }) {
             width="70%"
             style={{
               fontWeight: 'bold',
-              color: 'rgba(255, 255, 255, 1)', // Adjust the RGB values as desired
+              color: 'rgba(255, 255, 255, 1)',
               textAlign: 'center'
             }}
           >
-            {trackDetails[0].name}
+            {trackDetails.name}
           </Typography>
         </Grid>
       </Grid>
-
 
       <Box mt={8} mb={8}>
         <Container>
@@ -90,16 +84,14 @@ export default function SimulationPage({ secondaryNavbar }) {
           >
             <Grid item>
               <Select
-                value={selectedTrackId || ''}
+                value={selectedTrackId}
                 onChange={handleTrackSelect}
                 displayEmpty
                 style={{ width: 160, marginRight: '10px' }}
               >
-
                 <MenuItem disabled value="">
                   <em style={{ color: 'lightgray' }}>Select Track</em>
                 </MenuItem>
-
                 {trackOptions.map((track) => (
                   <MenuItem key={track.id} value={track.id}>{track.name}</MenuItem>
                 ))}
@@ -113,15 +105,7 @@ export default function SimulationPage({ secondaryNavbar }) {
               >
                 Show details
               </Button>
-
             </Grid>
-
-
-            <Grid item>
-
-            </Grid>
-
-
           </Grid>
         </Container>
       </Box>
@@ -145,16 +129,16 @@ export default function SimulationPage({ secondaryNavbar }) {
             justifyContent: "center",
             padding: "30px",
             borderRadius: "40px",
-            borderTop: '8px solid #d60000', // Top border color
-            borderRight: '8px solid #d60000', // Right border color
-            borderLeft: 'none', // Hide the left border
-            borderBottom: 'none' // Hide the bottom border
+            borderTop: '8px solid #d60000',
+            borderRight: '8px solid #d60000',
+            borderLeft: 'none',
+            borderBottom: 'none'
           }}
         >
           <Grid container direction="row" alignItems="center" spacing={2}>
             <Grid item xs={12}>
               <img
-                src={trackDetails[0].image}
+                src={trackDetails.image}
                 alt="description of image"
                 style={{ width: '100%', height: 'auto' }}
               />
@@ -166,7 +150,7 @@ export default function SimulationPage({ secondaryNavbar }) {
                   City
                 </Typography>
                 <Typography variant="h5" gutterBottom style={{ fontWeight: 'bold', color: 'rgba(0, 0, 0, 1)' }}>
-                  {trackDetails[0].city}
+                  {trackDetails.country}
                 </Typography>
               </Grid>
 
@@ -175,7 +159,7 @@ export default function SimulationPage({ secondaryNavbar }) {
                   Country
                 </Typography>
                 <Typography variant="h5" gutterBottom style={{ fontWeight: 'bold', color: 'rgba(0, 0, 0, 1)' }}>
-                  {trackDetails[0].country}
+                  {trackDetails.city}
                 </Typography>
               </Grid>
 
@@ -184,16 +168,13 @@ export default function SimulationPage({ secondaryNavbar }) {
                   Length km
                 </Typography>
                 <Typography variant="h5" gutterBottom style={{ fontWeight: 'bold', color: 'rgba(0, 0, 0, 1)' }}>
-                  {trackDetails[0].length}
+                  {trackDetails.length}
                 </Typography>
               </Grid>
             </Grid>
           </Grid>
         </Grid>
       </Grid>
-
-
-      
     </>
-  )
+  );
 }
