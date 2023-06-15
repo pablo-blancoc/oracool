@@ -66,7 +66,7 @@ CREATE TABLE IF NOT EXISTS "next_results" (
 
 CREATE TABLE IF NOT EXISTS "predictions" (
   "id" uuid PRIMARY KEY DEFAULT (uuid_generate_v4()),
-  "user" uuid NOT NULL,
+  "userid" uuid NOT NULL,
   "circuit" uuid NOT NULL,
   "year" smallint NOT NULL,
   "results" jsonb

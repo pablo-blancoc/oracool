@@ -1,3 +1,4 @@
+import json
 from shared import format_exception
 from db.objects import (
     Driver,
@@ -6,6 +7,7 @@ from db.objects import (
     User,
     Circuit,
     NextResult,
+    Prediction,
 )
 import uuid
 
@@ -142,3 +144,25 @@ def tuple_to_next_result(data: tuple) -> NextResult:
         return None
 
     return next_result
+
+
+def tuple_to_prediction(data: tuple) -> Prediction:
+    if data is None:
+        return None
+
+    try:
+        if data[0] is None:
+            return None
+
+        pred = Prediction()
+        pred.id = uuid.UUID(data[0])
+        pred.userid = uuid.UUID(data[1])
+        pred.circuit = uuid.UUID(data[2])
+        pred.year = int(data[3])
+        pred.results = data[4]
+
+    except Exception as err:
+        print(format_exception(err))
+        return None
+
+    return pred

@@ -112,3 +112,14 @@ def create_a_group():
     except Exception as err:
         print(format_exception(err))
         return jsonify({"err": "server error"}), 500
+
+
+@groups.route("/allusers", methods=["GET"])
+def get_all_users():
+    try:
+        users = f.get_all_users()
+        return jsonify({"users": [user.d_minor() for user in users]}), 200
+
+    except Exception as err:
+        print(format_exception(err))
+        return jsonify({"err": "server error"}), 500
